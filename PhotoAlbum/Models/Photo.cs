@@ -7,6 +7,17 @@ using System.Web;
 
 namespace PhotoAlbum.Models
 {
+    public enum Ratings
+    {
+        [Display(Name = "1 star")]  onestar,
+        [Display(Name = "2 stars")] twostars,
+        [Display(Name = "3 stars")] threestars,
+        [Display(Name = "4 stars")] fourstars,
+        [Display(Name = "5 stars")] fivestars
+
+    }
+
+
     public class Photo
     {
         public int Id { get; set; }
@@ -16,8 +27,7 @@ namespace PhotoAlbum.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Range(1, 5)]
-        public int Rating { get; set; }
+        public Ratings Rating { get; set; }
 
         public int AlbumId { get; set; }
         [ForeignKey("AlbumId")]

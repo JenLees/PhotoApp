@@ -18,10 +18,15 @@ namespace PhotoAlbum.Migrations
 
         protected override void Seed(PhotoAlbum.Models.ApplicationDbContext context)
         {
-            context.Database.ExecuteSqlCommand("delete from Albums");            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Albums', RESEED, 0)");
+            context.Database.ExecuteSqlCommand("delete from Photos");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Photos', RESEED, 0)");
+
+            context.Database.ExecuteSqlCommand("delete from Albums");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Albums', RESEED, 0)");
 
             var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new ApplicationUserManager(userStore);            var user = userManager.FindByName("celestialarcher@gmail.com");
+            var userManager = new ApplicationUserManager(userStore);
+            var user = userManager.FindByName("celestialarcher@gmail.com");
             
 
             var albums = new Album[]
@@ -37,19 +42,19 @@ namespace PhotoAlbum.Migrations
                         new Photo {
                                 Title = "Otter",
                                 Description ="CUTE otter at the aquarium.",
-                                Rating = 5,
+                                Rating = Ratings.onestar,
                                 PhotoUrl = " https://www.facebook.com/photo.php?fbid=24689177156&set=a.24617132156.37152.557232156&type=3&theater"
                         },
                         new Photo {
                                 Title = "Jelly Fish",
                                 Description ="Peaceful jelly fish.",
-                                Rating = 5,
+                                Rating = Ratings.threestars,
                                 PhotoUrl = "https://www.facebook.com/photo.php?fbid=24688892156&set=a.24617132156.37152.557232156&type=3&theater"
                         },
                         new Photo {
                                 Title = "Penguins",
                                 Description ="Adorable penguins.",
-                                Rating = 5,
+                                Rating = Ratings.fivestars,
                                 PhotoUrl = "https://www.facebook.com/photo.php?fbid=24689517156&set=a.24689297156.37240.557232156&type=3&theater"
                         }
                      }
