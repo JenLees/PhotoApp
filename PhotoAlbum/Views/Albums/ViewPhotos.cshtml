@@ -1,0 +1,51 @@
+﻿@model PhotoAlbum.Views.Albums.PhotosVM
+
+@{
+    ViewBag.Title = "ViewPhotos";
+}
+
+<h2>ViewPhotos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreatePhoto", new { id = Model.AlbumId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo.PhotoUrl)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Photos) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.PhotoUrl)" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditPhoto", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsPhoto", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeletePhoto", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
